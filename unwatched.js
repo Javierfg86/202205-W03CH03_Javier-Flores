@@ -1,0 +1,47 @@
+import { Component } from './components/component.js';
+import { series } from './src/scripts/series.js';
+export class Unwatched extends Component {
+    constructor(selector) {
+        super();
+        this.template = this.createTemplate();
+        this.render(selector);
+    }
+    createTemplate() {
+        let html = ``;
+
+        let unwatched = series.filter((item) => item.watched === false);
+        unwatched.forEach(
+            (item) =>
+                (html += `
+                <li class="serie">
+                <img
+                  class="serie__poster"
+                  src=${item.poster}
+                  alt="${item.name} poster"
+                />
+                <h4 class="serie__title">${item.name}</h4>
+                <p class="serie__info">${item.creator} (${item.year})</p>
+                <ul class="score">
+                  <li class="score__star">
+                    <i class="icon--score fas fa-star" title="1/5"></i>
+                  </li>
+                  <li class="score__star">
+                    <i class="icon--score fas fa-star" title="2/5"></i>
+                  </li>
+                  <li class="score__star">
+                    <i class="icon--score fas fa-star" title="3/5"></i>
+                  </li>
+                  <li class="score__star">
+                    <i class="icon--score fas fa-star" title="4/5"></i>
+                  </li>
+                  <li class="score__star">
+                    <i class="icon--score fas fa-star" title="5/5"></i>
+                  </li>
+                </ul>
+                <i class="fas fa-times-circle icon--delete"></i>
+              </li>
+              `)
+        );
+        return html;
+    }
+}
